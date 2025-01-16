@@ -3,7 +3,22 @@ import ButtonGroup from "../components/ButtonGroup";
 import { toast } from "react-toastify";
 
 const Donate: React.FC = () => {
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
 
+  const handleSelectAmount = (amount: number) => {
+    setSelectedAmount(amount);
+    toast.info(`Selected donation amount: $${amount}`);
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!selectedAmount) {
+      toast.error("Please select a donation amount.");
+      return;
+    }
+
+    toast.success("Donation processed successfully!");
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10">
